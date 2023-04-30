@@ -1,17 +1,12 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
-import wineData from "./WineData.json"; // import the WineData.json file as a module
+import wineData from "./WineData.json";
 
-interface WineData {
-  Flavanoids: number;
-  Ash: number;
-}
-
-const LineChart: FC = () => {
-  const [data, setData] = useState<WineData[]>([]);
+const LineChart = () => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(wineData as WineData[]); // set the imported data to the data state
+    setData(wineData);
   }, []);
 
   const lineChartOptions = {

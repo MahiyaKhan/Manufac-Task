@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import LineChart from "./components/LineChart";
 import BarChart from "./components/BarChart";
 
-const App: FC = () => {
+const App = () => {
   return (
     <>
       <LineChart />

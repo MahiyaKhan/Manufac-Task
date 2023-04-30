@@ -1,23 +1,18 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
-import wineData from "./WineData.json"; // import the WineData.json file as a module
+import wineData from "./WineData.json";
 import { groupBy } from "lodash";
 
-interface WineData {
-  Alcohol: number;
-  Magnesium: number;
-}
-
-const BarChart: FC = () => {
-  const [data, setData] = useState<WineData[]>([]);
+const BarChart = () => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(wineData as WineData[]); // set the imported data to the data state
+    setData(wineData);
   }, []);
 
   const groupedData = groupBy(data, "Alcohol");
   const xAxisData = Object.keys(groupedData).map((key) => Number(key));
-  const seriesData = Object.values(groupedData).map((group: WineData[]) => {
+  const seriesData = Object.values(groupedData).map((group) => {
     const magnesiusValues = group.map((item) => item.Magnesium);
     const minMagnesium = Math.min(...magnesiusValues);
     return minMagnesium;
@@ -42,7 +37,7 @@ const BarChart: FC = () => {
     ],
   };
 
-  return <ReactEcharts option={barChartOptions} />;
+  return React.createElement(ReactEcharts, { option: barChartOptions });
 };
 
 export default BarChart;
